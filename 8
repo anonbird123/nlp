@@ -1,0 +1,23 @@
+# install first if not done:
+# pip install transformers torch
+
+from transformers import pipeline
+
+# Step 1: Load a pretrained BERT model for sentiment analysis
+print("Loading model... please wait...")
+sentiment_analyzer = pipeline("sentiment-analysis")
+
+# Step 2: Take input from user
+while True:
+    text = input("\nEnter a sentence (or 'exit' to stop): ")
+    if text.lower() == "exit":
+        print("Goodbye!")
+        break
+    
+    # Step 3: Predict sentiment
+    result = sentiment_analyzer(text)[0]
+    
+    # Step 4: Display result
+    label = result['label']
+    score = result['score']
+    print(f"Sentiment: {label} (Confidence: {score:.2f})")

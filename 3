@@ -1,0 +1,11 @@
+import nltk
+from nltk import RegexpTagger, word_tokenize, pos_tag
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger_eng', quiet=True)
+
+s = "The quick brown fox jumps over the lazy dog"
+pats = [(r'.*ing$', 'VBG'), (r'.*ed$', 'VBD'), (r'.*es$', 'VBZ'), (r'^-?[0-9]+$', 'CD'), (r'.*', 'NN')]
+toks = word_tokenize(s)
+print("Sentence:", s)
+print("\nRule-Based:", RegexpTagger(pats).tag(toks))
+print("\nStochastic:", pos_tag(toks))

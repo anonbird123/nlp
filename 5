@@ -1,0 +1,13 @@
+import nltk
+from nltk.wsd import lesk
+from nltk.corpus import wordnet as wn
+nltk.download(['wordnet','omw-1.4'], quiet=True)
+
+s = "I went to the bank to deposit some money".split()
+w = "bank"
+sense = lesk(s, w)
+print(f"Sentence: {' '.join(s)}\nWord: {w}\n")
+if sense:
+    print(f"Synset: {sense.name()}\nDef: {sense.definition()}\nEx: {sense.examples()}")
+else:
+    print("No sense found.")

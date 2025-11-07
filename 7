@@ -1,0 +1,22 @@
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Data
+texts = [
+ "The team won the football match","Government passes new policy",
+ "Cricket world cup starts next week","The president gave a speech",
+ "New AI technology is emerging","Basketball season has started",
+ "The minister announced reforms","Advances in machine learning are rapid"]
+labels = ["Sports","Politics","Sports","Politics","Technology","Sports","Politics","Technology"]
+
+# Train model
+cv = CountVectorizer()
+X = cv.fit_transform(texts)
+model = MultinomialNB().fit(X, labels)
+
+# Predict user input
+while True:
+    s = input("\nEnter a sentence (or 'exit'): ")
+    if s.lower() == 'exit': break
+    X_new = cv.transform([s])
+    print("Predicted:", model.predict(X_new)[0])

@@ -1,0 +1,11 @@
+//1
+import re, nltk
+from nltk.tokenize import word_tokenize
+nltk.download('punkt', quiet=True)
+nltk.download('punkt_tab', quiet=True)
+
+text = "Natural Language Processing (NLP) is fun! Let's tokenize this sentence."
+tokenize_basic = lambda t: [x for x in re.split(r'(\W+)', t) if x.strip()]
+print("Text:", text)
+print("\nBasic Tokenizer:", tokenize_basic(text))
+print("\nNLTK Tokenizer:", word_tokenize(text))

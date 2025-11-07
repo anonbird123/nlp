@@ -1,0 +1,14 @@
+import re, nltk
+from gensim.models import Word2Vec
+from nltk.tokenize import word_tokenize
+nltk.download('punkt', quiet=True)
+
+txt = """Natural Language Processing is a subfield of AI.
+Word2Vec helps computers understand meaning of words.
+Machine learning is widely used in NLP."""
+tokens = word_tokenize(re.sub(r'[^a-z\s]', '', txt.lower()))
+m = Word2Vec([tokens], vector_size=50, window=3, min_count=1, sg=1, epochs=100)
+print("Tokens:", tokens)
+print("\nSim('language','processing'):", m.wv.similarity("language", "processing"))
+print("Most similar to 'learning':", m.wv.most_similar("learning"))
+print("\nVector for 'nlp':\n", m.wv['nlp'])
